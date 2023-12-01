@@ -1,5 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const markdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -26,18 +27,18 @@ const questions = [
       {
         type: 'input',
         message: 'Please enter how anyone else can contribute to the work of this project.',
-        name: 'contribution',
+        name: 'guidelines',
       },
       {
         type: 'input',
         message: 'Please enter description of any tests that were run.',
-        name: 'tests',
+        name: 'test',
       },
       {
         type: 'list',
         message: 'What type of licence does this project have?',
-        name: `licence`,
-        choices: [`MIT`, `GPL`, `Apache` , `GNU`, `N/A`]
+        name: 'licence',
+        choices: ['MIT','GNU', 'Apache' , 'BSD', 'None']
       },
       {
         type: 'input',
@@ -57,33 +58,18 @@ const questions = [
   ];
 
 
-inquirer.prompt(questions.name)
-  .then(function(data) {
-    const template = 
-    `Project Name: ${title}
-    Description: ${description}
-    Badges: ${badges}
-    Installation: ${installation}
-    Usage: ${usage}
-    Contributing: ${constribution}
-    Support:
-      Email: ${email}
-      GitHub: ${GitHub}
-    Author: ${author}
-    License: ${licence}`;
+  function writeToFile(fileName, data) {
+    fs.writeFile("project-README.md", data, function (err) {
+        err ? console.log(err) : console.log(filename + " created!")
+    });
+}
 
-    function writeToFile(fileName, data) {
-      fs.writeFile(`./${fileName.toLowerCase().split(` `).join(``)}.md`, data, (err)=>{
-        if(err){
-          console.log(err)
-        }
-        console.log("Your README has been generated!");
-      })
-    }
-  });
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+  inquirer.prompt(questions)
+  .then (answers => writeToFile(generateMarkdown(answers)))
+};
 
 // Function call to initialize app
 init();
