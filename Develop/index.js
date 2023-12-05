@@ -21,24 +21,24 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'Please enter a description on the usage of this project.',
+        message: 'Please enter a description about how to use this product.',
         name: 'usage',
-      },
-      {
-        type: 'input',
-        message: 'Please enter how anyone else can contribute to the work of this project.',
-        name: 'guidelines',
-      },
-      {
-        type: 'input',
-        message: 'Please enter description of any tests that were run.',
-        name: 'test',
       },
       {
         type: 'list',
         message: 'What type of licence does this project have?',
-        name: 'licence',
+        name: 'license',
         choices: ['MIT','GNU', 'Apache' , 'BSD', 'None']
+      },
+      {
+        type: 'input',
+        message: 'Please enter information outlining how anyone else can contribute to the work of this project.',
+        name: 'contributing',
+      },
+      {
+        type: 'input',
+        message: 'Please enter description of any tests run for this project.',
+        name: 'test',
       },
       {
         type: 'input',

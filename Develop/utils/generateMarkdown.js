@@ -3,7 +3,7 @@
 function renderLicenseBadge(license) {
   let badge = ""
   if (license != "None") {
-    badge = "![License Badge](https://img.shields.io/badge/" + license + "-blue)"
+    badge = `![License Badge](https://img.shields.io/badge/${license}-blue)`
   }
   return badge;
 }
@@ -11,7 +11,7 @@ function renderLicenseBadge(license) {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  let licenseLink;
+  let licenseLink = ""
 
   switch(license) {
     case "MIT":
@@ -49,7 +49,7 @@ function renderLicenseSection(license) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  const sections = ["Description", "Installation", "Tests", "License", "Usage", "Support", "Contributions", "Authors", "Status"];
+  const sections = ["Description", "Installation", "Usage", "License", "Contributing", "Tests", "Questions"];
 
   let markdown = renderLicenseBadge(data.license) +"\n";
   
@@ -71,26 +71,24 @@ function generateMarkdown(data) {
   ## Installation
   ${data.installation}
   
-  ## Tests
-  ${data.test} \n`
+  ## Usage
+  ${data.usage} \n`
   
   markdown += renderLicenseSection(data.license) + "\n"
   markdown += renderLicenseLink(data.license) + "\n"
 
   markdown +=
-  `## Usage
-  ${data.usage}
+  `## Contributing
+  ${data.contributing}
   
-  ## Support
-  You can find me at https://github.com/${data.GitHub}. You can reach out to me with any questions regarding this project at ${data.email}.
-  
-  ## Contributions
-  ${data.guidelines}
-  
-  ## Authors and acknowledgment
-  This project was written by ${data.author}.
-  
-  ## Project status`
+  ## Tests
+  ${data.test}
+
+  ## Questions
+  Please visit https://github.com/${data.GitHub} for more information on this project and others written by this author.\n
+  If there are any additional quesitons regarding this project, please email ${data.email} and the author will get back to you as soon as they can.\n
+  The author of this project is ${data.author}.`
+
 
   return markdown;
 }
